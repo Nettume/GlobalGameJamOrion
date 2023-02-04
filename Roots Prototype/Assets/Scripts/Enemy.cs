@@ -38,6 +38,10 @@ public class Enemy : MonoBehaviour
     private Vector2 Follow()
     {
         //Possibly follow target x
-        return (Target.position - transform.position) * speed;
+       return new Vector2((Target.position.x - transform.position.x) * speed, Jump());
+    }
+    private float Jump()
+    {
+        return (Target.position.y - transform.position.y);
     }
 }

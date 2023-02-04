@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Protagnist : MonoBehaviour
 {
-    const int GROUND_RADIUS = 1 / 2;
+    const int GROUND_RADIUS = 2;
     float movX = 0;
     float movY = 0;
     float speed = 3f;
