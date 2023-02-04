@@ -15,7 +15,7 @@ public class Protagnist : MonoBehaviour
 
     Rigidbody2D rigid;
     Vector2 direction;
-    public float jumpHeight;
+    public float jumpHeight = 5f;
 
     // Start is called before the first frame update
     private void Awake()
@@ -73,6 +73,7 @@ public class Protagnist : MonoBehaviour
         if (isGrounded == true)
         {
             Vector2 leap = Vector2.up * jumpHeight;
+            Debug.Log(leap);
             return leap;
         }
         else
