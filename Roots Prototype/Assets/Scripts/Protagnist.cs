@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Protagnist : MonoBehaviour
 {
-    const int GROUND_RADIUS = 2;
+    const int GROUND_RADIUS = 1 / 2;
     float movX = 0;
     float movY = 0;
     float speed = 3f;
@@ -70,7 +70,7 @@ public class Protagnist : MonoBehaviour
     {
         Debug.Log(isGrounded);
         isGrounded = Physics2D.OverlapCircle(groundPos.position, GROUND_RADIUS, ground);
-        if (isGrounded == true)
+        if (isGrounded)
         {
             Vector2 leap = Vector2.up * jumpHeight;
             Debug.Log(leap);

@@ -5,17 +5,23 @@ using UnityEngine;
 public class cameraFollow : MonoBehaviour
 {
     public GameObject player;
-    public Vector2 offset;
+    public Vector3 offset = new Vector3(0,0,-10);
+    private float timeElasped;
 
-// Start is called before the first frame update
-     void Start()
+    public int Duration = 2;
+
+    // Start is called before the first frame update
+    void Start()
     {
        // player = GameObject.FindWithTag("Player"); // The player
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 10);
+        transform.position = Vector2.Lerp(transform.position, player.transform.position + offset, timeElasped / Duration);
+        timeElasped += Time.deltaTime;
+            //new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 10);
+            
     }
 }
