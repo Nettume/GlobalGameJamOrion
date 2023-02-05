@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Protagonist : MonoBehaviour
 {
-    const int GROUND_RADIUS = 2;
+    const int GROUND_RADIUS = 3;
     float movX = 0;
     float movY = 0;
     public float speed = 3f;
@@ -16,10 +16,15 @@ public class Protagonist : MonoBehaviour
     Rigidbody2D rigid;
     Vector2 direction;
     public float jumpHeight = 5f;
-
+    GameManager gameManager;
     // Start is called before the first frame update
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+        if (gameManager == null)
+        {
+           gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
         rigid = transform.GetComponent<Rigidbody2D>();
         rigid.gravityScale = rigid.gravityScale * 10;
     }
@@ -85,12 +90,7 @@ public class Protagonist : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Application.Quit();
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        if (gameManager == null)
-        {
-            gameManager = GameManager.Instance;
-        }
+        //Application.Quit()
         gameManager.GameOver();
 
     }
