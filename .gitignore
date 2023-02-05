@@ -40,4 +40,7 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.log
+<<<<<<< HEAD
 *.log
+=======
+>>>>>>> second
