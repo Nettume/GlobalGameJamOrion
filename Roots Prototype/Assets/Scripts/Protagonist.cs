@@ -73,7 +73,7 @@ public class Protagonist : MonoBehaviour
   
 
     //Jump Module
-    private Vector2 Jump()
+    public Vector2 Jump()
     {
         Debug.Log(isGrounded);
         isGrounded = Physics2D.OverlapCircle(groundPos.position, GROUND_RADIUS, ground);

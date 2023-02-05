@@ -21,17 +21,21 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(health);
 
         switch (health)
         {
-            case 1: enemy.offset = Vector2.one;
+            case 1: //enemy.Offset = Vector3.one;
+                enemy.offset = 1;
                 break;
-            case 2: enemy.offset =  new Vector2(1,0);
+            case 2: //enemy.Offset =  new Vector3(2,0);
+                enemy.offset = 2;
                 break; 
-            case 3: enemy.offset = new Vector2(3,0);
+            case 3: //enemy.Offset = new Vector3(3,0);
+                enemy.offset = 3;
                 break;
-            default: enemy.offset = new Vector3(0,0); break;
+            default: //enemy.Offset = new Vector3(0,0); 
+                enemy.offset = 0;
+                break;
 
         }
 

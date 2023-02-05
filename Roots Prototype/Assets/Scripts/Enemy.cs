@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     public Transform Target;
     Rigidbody2D rg2D;
     private float speed = 5;
-    public Vector2 offset = Vector3.zero;
+    public Vector2 Offset { get { return ffset; } set { ffset = value; } }
+    private Vector2 ffset = Vector3.zero;
+    public float offset;
     float difference;
 
     private void Awake()
@@ -25,18 +27,9 @@ public class Enemy : MonoBehaviour
            
         }
     }
-    private void Update()
-    {
-        difference = Jump() - transform.position.y;
-        if (difference != 0)
-        {
-            Leap(difference);
-        }
-    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(Follow());
         if (Target.gameObject.activeInHierarchy)
         {
             Chase();
@@ -45,33 +38,30 @@ public class Enemy : MonoBehaviour
     //Running Script
     void Chase()
     {
-
-        Debug.Log(Vector2.Distance(Target.position, transform.position) >= 3f);
-        if (Vector2.Distance(Target.position, transform.position) >= 3f){
-            Debug.Log(Follow() - offset);
-            rg2D.velocity = Follow() - offset;
+        Vector3 teleport = Target.Find("EnemyPos").position;
+        if (Vector2.Distance(Target.position, transform.position) <= 50f) { 
+            rg2D.velocity = Follow();
+            //Debug.Log(Follow() - offset);
         }
         else
         {
-            Debug.Log("YEs");
-            transform.Translate(Target.position - Vector3.right);
+            transform.position = teleport;
         }
     }
 
     private Vector2 Follow()
     {
         //Possibly follow target x
-        return new Vector2( 1 * speed , Jump());
-        
+        return new Vector2((1 * speed) - offset, Jump());//1 * speed , Jump());
+
     }
-    private float Jump() //Moves the enemy in the same y direction as the player - a jump when the player jumps
+    private float Jump()
     {
-        return Target.position.y ; 
-    }
-    
-    private void Leap(float dif)
-    {
-        rg2D.AddForce(new Vector2(0,dif), ForceMode2D.Force);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rg2D.AddForce(Vector2.up * 100, ForceMode2D.Impulse);
+        }
+        return 0;
     }
     private void Capture(Transform player) // removes the player IE GAMEOVER!!
     {
