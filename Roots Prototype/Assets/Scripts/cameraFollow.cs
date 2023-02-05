@@ -15,5 +15,6 @@ public class cameraFollow : MonoBehaviour
 
         // Smoothly move the camera towards that target position
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        //fix the camera so it rearranges itself
     }
 }

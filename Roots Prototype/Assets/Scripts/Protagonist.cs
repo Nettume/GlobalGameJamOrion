@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Protagnist : MonoBehaviour
+public class Protagonist : MonoBehaviour
 {
     const int GROUND_RADIUS = 2;
     float movX = 0;
     float movY = 0;
-    float speed = 3f;
+    public float speed = 3f;
 
     public bool isGrounded = false;
     public Transform groundPos;
@@ -20,13 +20,15 @@ public class Protagnist : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        rigid = transform.GetComponent<Rigidbody2D>();
+        rigid.gravityScale = rigid.gravityScale * 10;
     }
     void Start()
     {
          rigid = transform.GetComponent<Rigidbody2D>();
         //Starting the gamme by calling his gameBody, position and future position
     }
-
+  
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -80,5 +82,16 @@ public class Protagnist : MonoBehaviour
         {
             return Vector2.zero;
         }
+    }
+    private void OnDestroy()
+    {
+        Application.Quit();
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (gameManager == null)
+        {
+            gameManager = GameManager.Instance;
+        }
+        gameManager.GameOver();
+
     }
 }
